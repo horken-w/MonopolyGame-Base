@@ -1,0 +1,107 @@
+@charset "utf-8";
+/* CSS Document */
+
+.index-body{margin:0; padding:0; font-family:"微軟正黑體" ; backgrouond-color:#e7ee4f; line-height:1.8; background-image:url(../images/bg_01.gif); }
+div.all1{ display:block; background-image:url(../images/map1.jpg); background-repeat:no-repeat; background-position:center top;}
+
+body {margin:0; padding:0; font-family:"微軟正黑體" ; backgrouond-color:#e7ee4f; line-height:1.8;}
+div.all1{ display:block; background-image:url(../images/map1.jpg); background-repeat:no-repeat; background-position:center top;}
+
+a{ color:#fff; text-decoration:none;}
+a:hover{ color:#FFFD00;}
+a:hover img{ MOZ-OPACITY: 0.5; OPACITY: 0.5;FILTER: alpha(opacity=50);}
+
+div.main1{ width:1000px; height:818px;margin-right:auto; margin-left:auto; position:relative;display:block; background-image:url(../images/map1.jpg); background-repeat:no-repeat; background-position:center top;}
+
+h1.logo{ line-height:1px; padding:0px; margin:0; display:block; background-image:url(../images/index_logo_03.png); text-indent:-9999px; width:600px; height:193px; margin-left:201px;  z-index:15; position:absolute;}
+div.logo_time{ display:block; margin-left:5px; padding-top:10px; }
+div.sign_in{ display:block; width:210px; height:173px; background-image:url(../images/signin_bg_04.png);  right:0px; top:0px; padding-top:10px; position:absolute; background-repeat:no-repeat;}
+div.sign_in .sign_in_table{ margin-left:auto; margin-right:20px;}
+div.sign_in .sign_in_table td{ height:42px; line-height:18px; }
+
+div.sign_in .sign_in_table input{ height:16px; }
+
+/*----copyright----*/
+div.footer { background-image:url(../images/footer_bg_12.gif); height:126px; width:100%; margin-top:20px; }
+div.footer_table{ width:950px; margin-left:auto; margin-right:auto; padding-top:35px; font-size:90%; color:#fff; }
+
+/*------menu--------*/
+ul.menu{ margin:0; padding:0; margin-top:225px;}
+ul.menu li{ list-style:none; text-indent:-9999px; float:left;}
+.menu_but1 a{ display:block; width:208px; height:58px; background-image: url(../images/menu_05.gif);}
+.menu_but2 a{ display:block; width:198px; height:58px; background-image: url(../images/menu_06.gif);}
+.menu_but3 a{ display:block; width:198px; height:58px; background-image: url(../images/menu_07.gif);}
+.menu_but4 a{ display:block; width:198px; height:58px; background-image: url(../images/menu_08.gif);}
+.menu_but5 a{ display:block; width:198px; height:58px; background-image: url(../images/menu_09.gif);}
+
+.menu_but1 a:hover{  background-image: url(../images/menu_o_05.gif);}
+.menu_but2 a:hover{  background-image: url(../images/menu_o_06.gif);}
+.menu_but3 a:hover{  background-image: url(../images/menu_o_07.gif);}
+.menu_but4 a:hover{  background-image: url(../images/menu_o_08.gif);}
+.menu_but5 a:hover{  background-image: url(../images/menu_o_09.gif);}
+
+
+/*--------走的格子------*/
+.map_table{ width:910px; height:490px; top:173px; left:35px;  position:relative; }
+.map_grid0{ display:block; width:70px; height:70px; position:absolute; bottom:0px; right:0px;  }
+.map_grid1{ display:block; width:70px; height:70px; position:absolute; bottom:70px;  right:0px; }
+
+/*--------ho bear------*/
+#stop-motion-animation { width:70px; height:70px; position:absolute; bottom:0px; right:0px; background-image: url(../images/bear-1.png); display:block;
+}
+
+/*#stop-motion-animation{
+ width:70px;
+ height:70px;
+ background-image: url(../images/bear-1.png) ;
+ background-repeat:no-repeat;
+ 
+-webkit-animation-name:ani;
+ -webkit-animation-duration:0.6s;
+ -webkit-animation-timing-function:steps(2);
+ -webkit-animation-iteration-count:infinite;
+ -webkit-animation-play-state:paused;
+ animation-name:ani;
+ animation-duration:0.6s;
+ animation-timing-function:steps(2);
+ animation-iteration-count:infinite;
+ animation-play-state:paused;
+  -webkit-animation-play-state:running;
+ animation-play-state:running;
+}
+#stop-motion-animation > div:hover{
+}
+@-webkit-keyframes ani{
+ 100%{
+  background-position:-140px 0;
+ }
+}
+@keyframes ani{
+ 100%{
+  background-position:-140px 0;
+ }
+}*/
+
+/*-------POP-------*/
+.pop_bg1{ display:block; height:600px; width:880px; background-image:url(../images/pop_bg1.png); position:relative; }
+.pop_bg2{ display:block; height:550px; width:824px; background-image:url(../images/pop_bg2.png); position:relative; }
+div.pop_title{ display:block; width:200px; font-size:180%; color:#fff; font-weight: bold; text-align:center; margin-left:auto; margin-right:auto; line-height:47px;}
+div.pop_close{ position:absolute; right:90px; top:20px; width:40px; height:40px; display:block;}
+div.pop_close2{ position:absolute; right:30px; top:20px; width:40px; height:40px; display:block;}
+div.pop_main{ width:617px; margin-right:auto; margin-left:auto; margin-top:25px; line-height:1.7;}
+div.pop_main ul{ padding:0px; margin:0; color:#605852;}
+div.pop_info_main_bg{ background-image:url(../images/pop_info.png); width:447px; height:371px; padding-left:150px; margin-left:10px; padding-top:5px; margin-top:5px;}
+div.pop_main2{ width:790px;margin-right:auto; margin-left:auto; margin-top:15px; line-height:1.6;}
+/*------font------*/
+.font01{ color:#c30000; font-size:130%; font-weight:bold;}
+.font02{ color:#c60202; font-size:110%;font-weight:bold;}
+
+.but1 a{ background-color:#a84200; -webkit-border-radius: 7px;
+-moz-border-radius: 7px;
+border-radius: 7px; padding:5px 10px 5px 10px;}
+.but1 a:hover{ background-color:#C76431; }
+
+.but2 a{ background-color:#ff6700; -webkit-border-radius: 7px;
+-moz-border-radius: 7px;
+border-radius: 7px; padding:5px 10px 5px 10px;}
+.but2 a:hover{ background-color:#ff881e; }
