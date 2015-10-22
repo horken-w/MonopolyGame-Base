@@ -1,0 +1,31 @@
+.rollarea{
+	position: relative;
+	width: 150px;
+	height: 150px;
+	left: 58.5%;
+	top: 46%;
+}
+.dice{
+	background: url('../images/dice.png') no-repeat;
+	background-size: 80%;
+	width: 60%;
+	height: 43%;
+	cursor: pointer;
+}
+.dice-1{ background-position: -5px -4px;}
+.dice-2{ background-position: -5px -78px;}
+.dice-3{ background-position: -5px -152px;}
+.dice-4{ background-position: -5px -226px;}
+.dice-5{ background-position: -5px -307px;}
+.dice-6{ background-position: -5px -387px;}
+.dice-t{ background-position: 2px -468px;}
+.dice-s{ background-position: 2px -545px;}
+.dice-e{ background-position: 2px -630px;}
+
+.map_grid > img{
+	position: absolute;
+	left: 0;
+}
+.map_grid > img:last-child{
+	opacity: 0;
+}

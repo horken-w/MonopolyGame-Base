@@ -48,13 +48,13 @@ ul.menu li{ list-style:none; text-indent:-9999px; float:left;}
 
 /*--------走的格子------*/
 .map_table{ width:910px; height:490px; top:173px; left:35px;  position:relative; }
-.map_grid0{ display:block; width:70px; height:70px; position:absolute; bottom:0px; right:0px;  }
 .map_grid{display:block; width:70px; height:70px; position:absolute;}
+/*.map_grid0{ display:block; width:70px; height:70px; position:absolute; bottom:0px; right:0px;  }*/
 /*.map_grid1{ display:block; width:70px; height:70px; position:absolute; bottom:70px;  right:0px; }*/
 
 /*--------ho bear------*/
-#stop-motion-animation { width:70px; height:70px; position:absolute; bottom:0px; right:0px; background-image: url(../images/bear-1.png); display:block;
-}
+/*#stop-motion-animation { width:70px; height:70px; position:absolute; bottom:0px; right:0px; background-image: url(../images/bear-1.png); display:block;
+}*/
 
 /*#stop-motion-animation{
  width:70px;
