@@ -84,27 +84,27 @@ Mapset.lightbox=function(){
 				text: '查看提示'
 			})).appendTo(main);
 		});
-	backdrop.fadeIn('slow')
-		.appendTo('body').queue(function(){
-			var h, w=backdrop.outerWidth()/2-642/2;
-			(backdrop.outerHeight()/2-100<195) ?	h=195 : h=backdrop.outerHeight()/2-100;
-			popup.show(1000).appendTo('body')
-			.css({
-				left: w,
-				top: h
-			});
-			$('<p/>').css({
-				fontSize: "130%",
-				fontWeight: 900
-			}).text('請問屏東黑鮪魚祭的地點是在那裡?').appendTo(main)
-			span.clone().addClass('font01').text('Q.').prependTo($('p'));
-			div.clone().addClass('table').appendTo(main).queue(question()).dequeue();
-			$('<hr />').appendTo(main);
-			span.clone().addClass('font01').text('您答對！可獲得大富翁幸運抽獎(超商禮券)抽獎機會1次 ').appendTo(main);
-			$('<br />').appendTo(main)
-			span.clone().addClass('font01').text('您答錯了！').appendTo(main);
-			span.clone().addClass('pop_but').append($('<a />').text('確認')).appendTo(main);
-		}).dequeue();
+	backdrop.fadeIn('slow').appendTo('body');
+
+	var h, w=backdrop.outerWidth()/2-642/2;
+	(backdrop.outerHeight()/2-100<195) ?	h=195 : h=backdrop.outerHeight()/2-100;
+		popup.fadeIn(2000).appendTo('body');
+		$('<p/>').css({
+			fontSize: "130%",
+			fontWeight: 900
+		}).text('請問屏東黑鮪魚祭的地點是在那裡?').appendTo(main)
+		span.clone().addClass('font01').text('Q.').prependTo($('p'));
+		div.clone().addClass('table').appendTo(main).queue(question()).dequeue();
+		$('<hr />').appendTo(main);
+		span.clone().addClass('font01').text('您答對！可獲得大富翁幸運抽獎(超商禮券)抽獎機會1次 ').appendTo(main);
+		$('<br />').appendTo(main)
+		span.clone().addClass('font01').text('您答錯了！').appendTo(main);
+		span.clone().addClass('pop_but').append($('<a />').text('確認')).appendTo(main);
+	
+		$(document).on('click', '.logo', function(){
+			$(backdrop).fadeOut(1000);
+			$('.pop').fadeOut(1000);
+		})
 }
 $(function(){ 
 	var dice = $("#dice"), p=2, dicenum,dicen= dice[0].classList[1].split('-')[1], bear =$('<div class="bear"/>');
@@ -146,8 +146,8 @@ $(function(){
 		}).queue(function(){
 			for(var i=0; i<dicenum; i++){
 				p=Mapset.walkStep(p, bear);
-			}
-		}).dequeue();		
+
+			};
+		}).dequeue().delay(2000).queue(Mapset.lightbox());
 	});
-	Mapset.lightbox();
 })
