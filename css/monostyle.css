@@ -21,11 +21,44 @@
 .dice-t{ background-position: 2px -468px;}
 .dice-s{ background-position: 2px -545px;}
 .dice-e{ background-position: 2px -630px;}
-
 .map_grid > img{
 	position: absolute;
 	left: 0;
 }
-.map_grid > img:last-child{
-	opacity: 0;
+.bear{
+	width: 70px;
+	height: 70px;
+	background: url(../images/bear.png) no-repeat;
+	-webkit-animation: bearwalk 0.5s steps(2) infinite alternate;
+	-moz-animation: bearwalk 0.5s steps(2) infinite alternate;
+	-o-animation: bearwalk 0.5s steps(2) infinite alternate;
+    animation: bearwalk 0.5s steps(2) infinite alternate;
+}
+@keyframes bearwalk{
+	from{
+		background-position: -70px;
+	}
+	to{
+		background-position: 70px;
+	}
+	
+}
+/*lightbox*/
+.drop{
+	position: fixed;
+	background: hsla(0, 0%, 0%, 0.7);
+	width: 100%;
+	height: 100%;
+	top: 0; left: 0;
+}
+.center{
+	position: absolute;
+}
+.table{
+	display: flex;
+	width: 100%;
+}
+.td{
+	flex-flow: row wrap;
+	flex: 1;
 }
