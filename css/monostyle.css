@@ -64,3 +64,10 @@
 	flex-flow: row wrap;
 	flex: 1;
 }
+#event > .pop_close{
+	top: -20px;
+	right: 0;
+}
+.pop_bg1, .pop_bg2{
+	position: absolute;
+}
