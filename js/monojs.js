@@ -1,4 +1,5 @@
-var x=0, y=0, $div=$('<div class=map_grid/>'),table=$('.map_table'), map={"position":['top','left','bottom','right','top','right','bottom','right','top','right','bottom','left','bottom'],'spaces':[6,12,6,2,4,2,4,2,4,4,2,1,2]};
+var x=0, y=0, a=$('<a href="#" target="_blank"/>'), $div=$('<div class=map_grid/>'),table=$('.map_table'), bear =$('<div class="bear"/>'), bearp=0
+	,map={"position":['top','left','bottom','right','top','right','bottom','right','top','right','bottom','left','bottom'],'spaces':[6,12,6,2,4,2,4,2,4,4,2,1,2]};
 
 var Mapset=function(e){
 	this.position=e;
@@ -6,40 +7,40 @@ var Mapset=function(e){
 Mapset.prototype={
 	topLine:function(e){
 		for(var i=0; i<e; i++){
-			$div.clone().css({
+			a.clone().append($div.clone().css({
 				bottom: x,
 				right: y
-			}).appendTo(table);
+			})).appendTo(table);
 			x+=70;
 		}
 	},
 	rightLine:function(e){
 		for(var i=0; i<e; i++){
-			$div.clone().css({
+			a.clone().append($div.clone().css({
 				bottom: x,
 				right: y
-			}).appendTo(table);
+			})).appendTo(table);
 			y-=70;
 		}
 	},
 	bottomLine:function(e){
 		for(var i=0; i<e; i++){
-			$div.clone().css({
+			a.clone().append($div.clone().css({
 				bottom: x,
 				right: y
-			}).appendTo(table);
+			})).appendTo(table);
 			x-=70;
 		}
 	},
 	leftLine:function(e){
 		for(var i=0; i<e; i++){
-			$div.clone().css({
+			a.clone().append($div.clone().css({
 				bottom: x,
 				right: y
-			}).appendTo(table);
+			})).appendTo(table);
 			y+=70;
 		}
-	}	
+	}
 }
 Mapset.renderMap=function(position,space){
 	var map=new Mapset();
@@ -61,55 +62,25 @@ Mapset.renderMap=function(position,space){
 	}
 }
 Mapset.walkStep=function(place, hobear){
-		place+=1
-		hobear.appendTo('.map_grid:eq('+ place+')');
-		return place;
-}
-Mapset.prototype.eventbox=function(questions){
-	var div=$('<div/>'), popup=$('<div id="event" class="pop center"/>'),main=div.clone().addClass('pop_main'), span=$('<span/>');
-	var answers=['台中', '南投', '墾丁'];
-	var h, q;
-	switch (Math.floor(Math.random() * 4 + 1)){
-		case 1:
-			q=1;
-			break;
-		case 2:
-			q=2;
-			break;
-		case 3:
-			q=3;
-			break;
-	}
-
-	($(window).outerHeight()/2-100<195) ?	h=195 : h=$(window).outerHeight()/2-195;
-
-	var question=function(){
-		for(var i=0; i<3; i++){
-			div.clone().addClass('td').text('A.'+answers[i]).appendTo('.table')
-			$('<input>').attr('type', 'radio').prependTo('.td:eq('+i+')')
-		}
-	}
-	popup.css('top', h);
-	popup.append(div.clone().addClass('pop_title2').text('問答題目')).append(main).appendTo('body')
-	popup.append('<div class="pop_close"><a href="#"><img src="images/close.png" alt="關閉" width="40" height="40" title="關閉" border="0"/></a></div>');
-	$('<span/>').css('float', 'right').append($('<a/>',{
-		href: '#',
-		target: '_blank',
-		text: '查看提示'
-	})).appendTo(main);
-	$('<p/>').css({
-		fontSize: "130%",
-		fontWeight: 900
-	}).text('請問屏東黑鮪魚祭的地點是在那裡?').appendTo(main);
-	span.clone().addClass('font01').text('Q.').prependTo($('p'));
-	div.clone().addClass('table').appendTo(main).queue(question()).dequeue();
-	$('<hr />').appendTo(main);
-
-	span.clone().addClass('pop_but').append($('<a />').text('確認')).appendTo(main);
+	place+=1;
+	hobear.appendTo('.map_grid:eq('+ place+')');
+	return place;
 }
 Mapset.prototype.rulebox=function(action){
 	var li=$('<li/>'), div=$('<div/>'), title=$('<div class="pop_title"/>'),close=$('<div class="pop_close"><a href="#"><img src="images/close.png" alt="關閉" width="40" height="40" title="關閉" border="0"/></a></div>'),
-		rulelist={'rule':['需註冊成為「臺灣觀光年曆」網站會員；參加資格不限國籍，海內外人士均可參加。','登入後，每日有一次免費擲骰子機會。','每<span class="font02">30點紅利</span>可兌換一次擲骰機會。','<strong>現玩現中獎：</strong>獲得紅利或免費擲骰。','<strong>旅遊知識家：</strong>回答旅遊相關問題，答對可獲得禮券抽獎機會。','<strong>玩樂分享家：</strong>出現全臺旅遊資訊，分享至FB塗鴉牆可獲得旅行箱抽獎機會。', '若有足夠紅利，玩家可持續兌換擲骰機會，並到達大富翁環島地圖終點站，即可獲得最<span class="font02">大獎LED液晶電視</span>抽獎機會。','每日最多可獲得1次此獎項之抽獎機會。'], "notices":['本活動之活動辦法及相關注意事項均載明於活動網頁中。參加者於參加本活動之同時，即視為已詳閱並同意接受本活動之活動辦法、隱私權聲明及相關注意事項之規範。','為維護參加者得獎公平性，禁止網友從事外掛程式、登錄資料不實、多重身分帳號、違反本網站各項規範或任何影響活動公平性之行為，一經查證屬實，主辦單位有權取消其參加資格，或追回獎項（品）。','活動中獎者應詳實填寫個人資料，若因資料填寫不完整或不正確導致無法通知中獎者，或未於期限內回覆中獎通知者，將視同自願放棄領獎資格，主辦單位不另行通知，獎項也不另行補發。','本活動之獎品內容若因市場缺貨或其它不可抗力之因素而無法出貨時，活動主辦單位得以同質性的等值獎品取代之。','本活動之獎品不得轉換、轉讓或折換現金，獎品圖片僅供參考，以實際商品為主；本活動獎項寄送地區僅限臺、澎、金、馬，主辦單位不處理郵寄獎品至海外地區之事宜。', '本項活動競技競賽機會中獎獎金或給與，依中華民國所得稅法相關規定辦理，獎金金額超過新臺幣1,001元（含）以上，主辦單位將於次年1月底前開具扣繳憑單給中獎人，請中獎人依規定申報。非中華民國境內居住之外籍人士不論得獎者所得之金額，須就得獎所得扣繳20%機會中獎稅額。獎金所得將由承辦單位於年度結算另行寄發扣繳或免扣繳憑單。', '得獎名單公布後，將會以電子郵件寄出通知信函至得獎者信箱，若得獎者未收到電子郵件通知，請與維運小組連絡（維運小組：02-87734300轉626李先生，電子信箱：chris.lee@techmore.com.tw）。','本活動因故無法進行時，主辦單位有權取消、終止、修改或暫停活動，本活動辦法如有未盡事宜，主辦單位得保留變更或停止本活動之權利。']};
+		rulelist={'rule':['需註冊成為「臺灣觀光年曆」網站會員；參加資格不限國籍，海內外人士均可參加。',
+			'登入後，每日有一次免費擲骰子機會。','每<span class="font02">30點紅利</span>可兌換一次擲骰機會。',
+			'<strong>現玩現中獎：</strong>獲得紅利或免費擲骰。',
+			'<strong>旅遊知識家：</strong>回答旅遊相關問題，答對可獲得禮券抽獎機會。','<strong>玩樂分享家：</strong>出現全臺旅遊資訊，分享至FB塗鴉牆可獲得旅行箱抽獎機會。',
+			'若有足夠紅利，玩家可持續兌換擲骰機會，並到達大富翁環島地圖終點站，即可獲得最<span class="font02">大獎LED液晶電視</span>抽獎機會。','每日最多可獲得1次此獎項之抽獎機會。'],
+			"notices":['本活動之活動辦法及相關注意事項均載明於活動網頁中。參加者於參加本活動之同時，即視為已詳閱並同意接受本活動之活動辦法、隱私權聲明及相關注意事項之規範。',
+				'為維護參加者得獎公平性，禁止網友從事外掛程式、登錄資料不實、多重身分帳號、違反本網站各項規範或任何影響活動公平性之行為，一經查證屬實，主辦單位有權取消其參加資格，或追回獎項（品）。',
+				'活動中獎者應詳實填寫個人資料，若因資料填寫不完整或不正確導致無法通知中獎者，或未於期限內回覆中獎通知者，將視同自願放棄領獎資格，主辦單位不另行通知，獎項也不另行補發。',
+				'本活動之獎品內容若因市場缺貨或其它不可抗力之因素而無法出貨時，活動主辦單位得以同質性的等值獎品取代之。','本活動之獎品不得轉換、轉讓或折換現金，獎品圖片僅供參考，以實際商品為主；本活動獎項寄送地區僅限臺、澎、金、馬，主辦單位不處理郵寄獎品至海外地區之事宜。',
+				'本項活動競技競賽機會中獎獎金或給與，依中華民國所得稅法相關規定辦理，獎金金額超過新臺幣1,001元（含）以上，主辦單位將於次年1月底前開具扣繳憑單給中獎人，請中獎人依規定申報。非中華民國境內居住之外籍人士不論得獎者所得之金額，須就得獎所得扣繳20%機會中獎稅額。獎金所得將由承辦單位於年度結算另行寄發扣繳或免扣繳憑單。',
+				'得獎名單公布後，將會以電子郵件寄出通知信函至得獎者信箱，若得獎者未收到電子郵件通知，請與維運小組連絡（維運小組：02-87734300轉626李先生，電子信箱：<a href="mailto:chris.lee@techmore.com.tw">chris.lee@techmore.com.tw</a>）。',
+				'本活動因故無法進行時，主辦單位有權取消、終止、修改或暫停活動，本活動辦法如有未盡事宜，主辦單位得保留變更或停止本活動之權利。']};
+
 	var h, t=0, w=$(window).outerWidth()/2-430;
 	var rules=function(){
 		title.text('遊戲說明');
@@ -143,12 +114,13 @@ Mapset.prototype.rulebox=function(action){
 	};
 	var announces=function(){
 		title.text('得獎公佈');
+		$('.pop_bg2').attr('id', 'winner');
 		$('<p/>').addClass('font01').text('2015/12/10前公布').appendTo('.pop_main2')
 	};
-	($(window).outerHeight()/2 <195) ?	h=195 : h=$(window).outerHeight()/2-195;
+	h=$(window).outerHeight()/2-300;
 	if(action == 'but1' || action == 'but2')
 		div.clone().addClass('pop_bg1').css({'top': h, 'left': w}).append(title).append(close).append(div.clone().addClass('pop_main')).appendTo('body');
-	else 
+	else
 		div.clone().addClass('pop_bg2').css({'top': h, 'left': w}).append(title).append(close).append(div.clone().addClass('pop_main2')).appendTo('body');
 
 	switch(action){
@@ -169,7 +141,7 @@ Mapset.prototype.rulebox=function(action){
 	}
 }
 Mapset.lightbox=function(box, action){
-	var div=$('<div/>'),backdrop=$('<div class="drop"/>');	
+	var div=$('<div/>'),backdrop=$('<div class="drop"/>');
 
 	backdrop.fadeIn('slow').appendTo('body');
 	if(box == 1){
@@ -184,68 +156,23 @@ Mapset.lightbox=function(box, action){
 		$('#event, .pop_bg1, .pop_bg2').fadeOut(1000);
 
 		$(backdrop).fadeOut(1000).delay(1000)
-		.queue(function(next){
-			$(backdrop).remove();
-			$('#event, .pop_bg1, .pop_bg2').remove();
-			next();
-		}).dequeue();
+			.queue(function(next){
+				$(backdrop).remove();
+				$('#event, .pop_bg1, .pop_bg2').remove();
+				next();
+			}).dequeue();
 	})
-
-		// 
-		// span.clone().addClass('font01').text('您答對！可獲得大富翁幸運抽獎(超商禮券)抽獎機會1次 ').appendTo(main);
-		// $('<br />').appendTo(main)
-		// span.clone().addClass('font01').text('您答錯了！').appendTo(main);
-	
-		
-}
-$(function(){ 
-	var dice = $("#dice"), p=2, dicenum,dicen= dice[0].classList[1].split('-')[1], bear =$('<div class="bear"/>');
-
-	//地圖建置
-	for(var i=0; i< map.position.length; i++){
-		Mapset.renderMap(map.position[i], map.spaces[i]);
-	}
+	// span.clone().addClass('font01').text('您答對！可獲得大富翁幸運抽獎(超商禮券)抽獎機會1次 ').appendTo(main);
+	// $('<br />').appendTo(main)
+	// span.clone().addClass('font01').text('您答錯了！').appendTo(main);
+};
+Mapset.hobear=function(p){
 	//配置熊熊
 	if (p > 0) {
 		bear.appendTo('.map_grid:eq('+ p+')');
+		bearp= parseInt(p);
 	}else{
 		bear.appendTo('.map_grid:first');
+		bearp=0;
 	};
-	
-	//擲骰子
-	dice.on('click', function(){
-		dice.attr("class", "dice");
-		dice.css('cursor', 'default');
-		dicenum = Math.floor(Math.random() * 6 + 1);
-		dice.stop().animate({
-			left : '+2px'
-		}, 85, function() {
-			dice.addClass('dice-t');
-		}).delay(170).animate({
-			top : '-5px'
-		}, 85, function(){
-			dice.removeClass('dice-t').addClass('dice-s');
-		}).delay(170).animate( {
-			opacity : 'show'
-		}, 510, function() {
-			dice.removeClass('dice-s').addClass('dice-e');
-		}).delay(85).animate({
-			left : '-2px',
-			top: '2px'
-		}, 85, function(){
-			dice.removeClass('dice-e').addClass('dice-' + dicenum);
-			dice.css('cursor', 'pointer');
-		}).queue(function(){
-			for(var i=0; i<dicenum; i++){
-				setTimeout(p=Mapset.walkStep(p, bear),2000);
-			};
-		}).dequeue().delay(800).queue(function(){
-			Mapset.lightbox(1);
-		});
-	});
-	$('li[class^=menu_]:not(".menu_but3")').on('click', function(e){
-		e.preventDefault();
-		var btn=this.className.split('_')[1];
-		Mapset.lightbox(0, btn);
-	})
-})
+};
