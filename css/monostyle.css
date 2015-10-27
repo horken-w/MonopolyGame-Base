@@ -68,6 +68,65 @@
 	top: -20px;
 	right: 0;
 }
+.pop_bg2 > .pop_close{
+	right: 10px;
+}
 .pop_bg1, .pop_bg2{
 	position: absolute;
+}
+/*rules*/
+.pop_bg1 > .pop_main > .font02{
+	text-align: center;
+}
+.pop_bg1 > .pop_main > .font02:last-child{
+	margin-top: 7px;
+}
+.pop_info_main_bg > ul{
+	list-style: none;
+}
+.pop_info_main_bg > ul:nth-child(2){
+	margin-top: 20px;
+}
+.pop_info_main_bg > ul:last-child{
+	margin-top: 30px;
+}
+.pop_info_main_bg >ul >li{
+	counter-reset: scetion;
+	position: relative;
+}
+.pop_info_main_bg >ul >li:before{
+	counter-increment: section;
+	content: counter(scetion,disc);
+	position: absolute;
+  	left: -10px;
+}
+.pop_info_main_bg >ul:last-child >li:last-child:before{
+	counter-increment: section;
+	content: counter(scetion,none);
+}
+/*rewards*/
+.pop_main > img{
+	margin-top: 20px;
+}
+/*announce*/
+.pop_main2 > ul{
+	list-style: none;
+	counter-reset: rule;
+}
+.pop_main2 >ul >li{
+	position: relative;
+}
+.pop_main2 >ul >li:before{
+	counter-increment: rule;
+	content: counter(rule,decimal) ". ";
+	position: absolute;
+  	left: -25px;
+}
+/*winner*/
+.pop_bg2:last-child > .pop_main2{
+	height: 400px;
+	background: url("../images/winner.gif") no-repeat center bottom;
+}
+.pop_main2 > .font01{
+	text-align: center;
 }
