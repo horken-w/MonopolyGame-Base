@@ -99,7 +99,7 @@ Mapset.prototype.rulebox=function(action){
 	var rewards=function(){
 		title.text('環島有禮');
 		$('<img/>', {
-			src:'images/pop_award.png',
+			src:'../images/pop_award.png',
 			alt: '環島終點抽、好康幸運抽、現玩馬上送',
 			title: '環島終點抽、好康幸運抽、現玩馬上送'
 		}).appendTo('.pop_main')
@@ -162,12 +162,8 @@ Mapset.lightbox=function(box, action){
 				next();
 			}).dequeue();
 	})
-	// span.clone().addClass('font01').text('您答對！可獲得大富翁幸運抽獎(超商禮券)抽獎機會1次 ').appendTo(main);
-	// $('<br />').appendTo(main)
-	// span.clone().addClass('font01').text('您答錯了！').appendTo(main);
 };
 Mapset.hobear=function(p){
-	//配置熊熊
 	if (p > 0) {
 		bear.appendTo('.map_grid:eq('+ p+')');
 		bearp= parseInt(p);

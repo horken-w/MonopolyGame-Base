@@ -133,3 +133,13 @@
 .pop_main2 > .font01{
 	text-align: center;
 }
+/*events*/
+.sharetitle{
+	font-size: 130%;
+	font-weight: 900;
+	text-align: center;
+}
+#event .pop_main > img{
+	display: block;
+	margin: 0 auto;
+}
