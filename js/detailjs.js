@@ -40,6 +40,41 @@ Mapset.prototype.eventbox=function(questions){
 
     span.clone().addClass('pop_but').append($('<a />').text('確認')).appendTo(main);
 }
+Mapset.prototype.dicerun=function(dice){
+    var i=1;
+    dice.attr("class", "dice");
+    dice.css('cursor', 'default');
+    dicenum = Math.floor(Math.random() * 6 + 1);
+    dice.stop().animate({
+        left : '+2px'
+    }, 85, function() {
+        dice.addClass('dice-t');
+    }).delay(170).animate({
+        top : '-5px'
+    }, 85, function(){
+        dice.removeClass('dice-t').addClass('dice-s');
+    }).delay(170).animate( {
+        opacity : 'show'
+    }, 510, function() {
+        dice.removeClass('dice-s').addClass('dice-e');
+    }).delay(85).animate({
+        left : '-2px',
+        top: '2px'
+    }, 85, function(){
+        dice.removeClass('dice-e').addClass('dice-' + dicenum);
+        dice.css('cursor', 'pointer');
+    }).queue(function walk(){
+        setTimeout(function(){
+            bearp=Mapset.walkStep(bearp, bear);
+            if(i < dicenum){
+                walk();
+                i++
+            }
+        }, 500);
+    }).dequeue().delay(3000).queue(function(){
+        Mapset.lightbox(1);
+    });
+};
 
 // $.getJSON('http://localhost:8080/travel/TravelRichAction.do?method=getInit',function(data){
 //     $('.font01').text(data.bonus);
@@ -61,69 +96,40 @@ $(function(){
     // 配熊
     Mapset.hobear(2);
     //擲骰子
-    dice.on('click', function(){
-        if(event==0){
-            dice.attr("class", "dice");
-            dice.css('cursor', 'default');
-            dicenum = Math.floor(Math.random() * 6 + 1);
-            dice.stop().animate({
-                left : '+2px'
-            }, 85, function() {
-                dice.addClass('dice-t');
-            }).delay(170).animate({
-                top : '-5px'
-            }, 85, function(){
-                dice.removeClass('dice-t').addClass('dice-s');
-            }).delay(170).animate( {
-                opacity : 'show'
-            }, 510, function() {
-                dice.removeClass('dice-s').addClass('dice-e');
-            }).delay(85).animate({
-                left : '-2px',
-                top: '2px'
-            }, 85, function(){
-                dice.removeClass('dice-e').addClass('dice-' + dicenum);
-                dice.css('cursor', 'pointer');
-            }).queue(function walk(){
-                setTimeout(function(){
-                    bearp=Mapset.walkStep(bearp, bear);
-                    if(bearp < dicenum){
-                        walk();
-                    }
-                }, 500);
-            }).dequeue().delay(3000).queue(function(){
-                Mapset.lightbox(1);
-            });
-        }else if(event == 2){
-            alert('點數不足，請明天在試一次。')
-        }else if(event == 3){
-            dice.attr("class", "dice");
-            dice.css('cursor', 'default');
-            dicenum = Math.floor(Math.random() * 6 + 1);
-            dice.stop().animate({
-                left : '+2px'
-            }, 85, function() {
-                dice.addClass('dice-t');
-            }).delay(170).animate({
-                top : '-5px'
-            }, 85, function(){
-                dice.removeClass('dice-t').addClass('dice-s');
-            }).delay(170).animate( {
-                opacity : 'show'
-            }, 510, function() {
-                dice.removeClass('dice-s').addClass('dice-e');
-            }).delay(85).animate({
-                left : '-2px',
-                top: '2px'
-            }, 85, function(){
-                dice.removeClass('dice-e').addClass('dice-' + dicenum);
-                dice.css('cursor', 'pointer');
-            });
-            alert('請登入之後再進行遊戲。');
-        }else{
-            alert('是否花費紅利點數擲一次骰子?。');
-        }
-    });
+    if(event==0){
+        dice.off('click');
+        dice.on('click', function(){
+
+        });
+    }else if(event == 2){
+        alert('點數不足，請明天在試一次。')
+    }else if(event == 3){
+        dice.attr("class", "dice");
+        dice.css('cursor', 'default');
+        dicenum = Math.floor(Math.random() * 6 + 1);
+        dice.stop().animate({
+           left : '+2px'
+        }, 85, function() {
+            dice.addClass('dice-t');
+        }).delay(170).animate({
+            top : '-5px'
+        }, 85, function(){
+            dice.removeClass('dice-t').addClass('dice-s');
+        }).delay(170).animate( {
+            opacity : 'show'
+        }, 510, function() {
+            dice.removeClass('dice-s').addClass('dice-e');
+        }).delay(85).animate({
+            left : '-2px',
+            top: '2px'
+        }, 85, function(){
+            dice.removeClass('dice-e').addClass('dice-' + dicenum);
+            dice.css('cursor', 'pointer');
+        });
+        alert('請登入之後再進行遊戲。');
+       }else{
+        alert('是否花費紅利點數擲一次骰子?。');
+    };
     $('li[class^=menu_]:not(".menu_but3")').on('click', function(e){
         e.preventDefault();
         var btn=this.className.split('_')[1];
