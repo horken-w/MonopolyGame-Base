@@ -143,3 +143,11 @@
 	display: block;
 	margin: 0 auto;
 }
+/*record*/
+.bgpic{
+	background: url('../images/record.gif') no-repeat bottom right;
+	width: 550px;
+	height: 400px;
+	margin-top: 45px;
+	padding-left: 50px;
+}
