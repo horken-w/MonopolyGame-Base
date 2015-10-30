@@ -163,6 +163,20 @@ Mapset.lightbox=function(box, action){
 			}).dequeue();
 	})
 };
+Mapset.sharebox=function(b, url, title){
+	var document_title = title, location_url = url;
+	switch(b){
+		case 'facebook':
+			window.open('http://www.facebook.com/sharer.php?u='.concat(encodeURIComponent(location_url)).concat('&t=').concat(encodeURIComponent(document_title)),'_blank','height=500,resizable=yes,scrollbars=yes,width=700');
+			break;
+		case 'google':
+			window.open('https://plus.google.com/share?url='.concat(encodeURIComponent(location_url)),'_blank','height=500,resizable=yes,scrollbars=yes,width=700');
+			break;
+		case 'twitter':
+			window.open('http://twitter.com/home/?status='.concat(encodeURIComponent(document_title)).concat(' ').concat(encodeURIComponent(location_url)),'_blank','height=500,resizable=yes,scrollbars=yes,width=700');
+			break;
+	}
+};
 Mapset.hobear=function(p){
 	if (p > 0) {
 		bear.appendTo('.map_grid:eq('+ p+')');

@@ -34,12 +34,19 @@ Mapset.prototype.eventbox=function(questions){
             $('<hr />').appendTo(main);
             break;
         case 2:
+            var url=location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + questions.shareEvent.url;
             boxtitle.text('新聞分享');
             p.clone().addClass('.sharetitle').text('台灣燈會 見證花燈技藝傳承與創新').appendTo(main);
             $('<hr />').appendTo(main);
             p.clone().text('每年到了元宵節，全臺各地舉辦各種熱鬧的慶典，其中最吸睛也是最多人參與的，就是元宵節當天開展的台灣燈會！台灣燈會每年移至不同縣市展出，將城市當成大型的花燈展演舞台，配合當地自然地景、人文內涵，規劃燈區主題；其中展出要角之一，就是由燈藝師手工製作的傳統花燈，精彩創新的花燈展演，也讓台灣燈會登上國際舞台，').append('<a href="#">...詳全文 </a>').appendTo(main);
             $('<hr />').appendTo(main);
             span.clone().addClass('pop_but').append($('<a />').text('分享至臉書')).insertAfter('hr:last-child');
+            $('.pop_but').on('click', function(){
+                Mapset.sharebox('facebook', url, '繞著台灣跑  環島大富翁');
+                var ans;
+                ans={rewardId:questions.rewardId, rewardEvent:2};
+                callback('success', ans)
+            }).off('click');
             break;
         case 3:
             boxtitle.text('現玩現送');
@@ -120,14 +127,15 @@ Mapset.prototype.dicerun=function(dice){
                 i++
             }
         }, 500);
-    }).dequeue().delay(3000).queue(function(){
-        Mapset.lightbox(1, dicenum);
-    });
+    }).delay(500*(dicenum+1)).queue(function(){
+        Mapset.lightbox(1, data);
+        $('.rollarea').css('pointer-events', 'auto');
+    }).dequeue();
 };
 
 $(function(){
     var dice = $("#dice"), dicenum, event=0;
-
+    $('.rollarea').css('pointer-events', 'auto');
     //地圖建置
     for(var i=0; i< map.position.length; i++){
         Mapset.renderMap(map.position[i], map.spaces[i]);
@@ -137,6 +145,7 @@ $(function(){
 
     //擲骰子
     if(event==0){
+        $('.rollarea').css('pointer-events', 'none');
         dice.on('click', function(){
             var b=new Mapset();
             b.dicerun(dice);
@@ -146,6 +155,8 @@ $(function(){
     }else if(event == 2){
         alert('點數不足，請明天在試一次。')
     }else if(event == 3){
+
+        $('.rollarea').css('pointer-events', 'none');
         dice.attr("class", "dice");
         dice.css('cursor', 'default');
         dicenum = Math.floor(Math.random() * 6 + 1);
@@ -169,9 +180,19 @@ $(function(){
             dice.css('cursor', 'pointer');
         });
         alert('請登入之後再進行遊戲。');
-       }else{
+    }else{
+        $('.rollarea').css('pointer-events', 'none');
         alert('是否花費紅利點數擲一次骰子?。');
     };
+    $('#facebook').on('click', function(e){
+        e.preventDefault();
+        Mapset.sharebox('facebook', window.location.href, '繞著台灣跑  環島大富翁');
+
+    });
+    $('#google').on('click', function(e){
+        e.preventDefault();
+        Mapset.sharebox('google', window.location.href);
+    });
     $('li[class^=menu_]:not(".menu_but3")').on('click', function(e){
         e.preventDefault();
         var btn=this.className.split('_')[1];
