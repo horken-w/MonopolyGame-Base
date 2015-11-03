@@ -5,6 +5,9 @@
 	left: 58.5%;
 	top: 46%;
 }
+.unclick{
+	pointer-events: none;
+}
 .dice{
 	background: url('../images/dice.png') no-repeat;
 	background-size: 80%;
@@ -65,6 +68,10 @@
 .td{
 	flex-flow: row wrap;
 	flex: 1;
+}
+.td8{
+	flex-flow: row wrap;
+	flex: 8;
 }
 #event > .pop_close{
 	top: -20px;
@@ -146,12 +153,17 @@
 /*record*/
 .bgpic{
 	background: url('../images/record.gif') no-repeat bottom right;
-	width: 550px;
+	width: 500px!important;
 	height: 400px;
-	margin-top: 45px;
+	margin-top: 55px!important;
 	padding-left: 50px;
 }
 .ie8{
 	margin-top: -35px;
 	margin-right: -100px;
+}
+/*Login accept*/
+.pop3{
+	position: absolute;
+	z-index: 20;
 }

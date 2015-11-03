@@ -139,29 +139,67 @@ Mapset.prototype.rulebox=function(action){
 		default:
 			alert('Data error');
 	}
-}
+};
+Mapset.prototype.confirmbox=function(text){
+	var h=$(window).outerHeight()/2-250, w=$(window).outerWidth()/2-250, div=$('<div/>');
+	div.clone().addClass('pop3')
+		.css({'top': h,	'left': w}).append(div.clone()
+		.addClass('pop3_main')).appendTo('body');
+	$('<p/>').addClass('font01').text(text).appendTo('.pop3_main');
+	div.clone().addClass('space').appendTo('.pop3_main');
+	switch(text){
+		case '請先登入之後在跟熊熊一起玩遊戲喔！':
+		case '哭哭了！紅利點數不足，明天再來玩吧！':
+			$('<span/>').addClass('pop_but').append($('<a/>').attr('href', '#').text('確定')).appendTo('.pop3_main');
+			$('.pop_but > a').on('click', function(e){
+				e.preventDefault();
+				$('.drop, .pop3').remove();
+			});
+			break;
+		case '是否要使用30點紅利兌換擲骰機會一次？':
+			$('<span/>').addClass('pop_but').append($('<a/>').attr('href', '#').text('確定')).appendTo('.pop3_main');
+			$('<span/>').addClass('pop_but').append($('<a/>').attr('href', '#').text('取消')).appendTo('.pop3_main');
+			$('.pop_but > a:last').on('click', function(e){
+				e.preventDefault();
+				$('.drop, .pop3').remove();
+				$('.rollarea').css('pointer-events', 'auto');
+			});
+			break;
+		case '你可以免費擲一次骰子喔！':
+			$('<span/>').addClass('pop_but').append($('<a/>').attr('href', '#').text('確定')).appendTo('.pop3_main');
+			$('<span/>').addClass('pop_but').append($('<a/>').attr('href', '#').text('取消')).appendTo('.pop3_main');
+
+			$('.pop_but > a:last').on('click', function(e){
+				e.preventDefault();
+				$('.drop, .pop3').remove();
+				$('.rollarea').css('pointer-events', 'auto');
+			});
+			break;
+	}
+	div.clone().addClass('space').appendTo('.pop3_main');
+};
 Mapset.lightbox=function(box, action){
 	var div=$('<div/>'),backdrop=$('<div class="drop"/>');
-
 	backdrop.fadeIn('slow').appendTo('body');
+	var boxs=new Mapset();
+
 	if(box == 1){
-		var boxs=new Mapset();
 		boxs.eventbox(action);
-	}else{
-		var boxs=new Mapset();
+	}else if(box == 0){
 		boxs.rulebox(action);
+	}else{
+		boxs.confirmbox(action);
 	}
 	$('.pop_close').on('click', function(e){
 		e.preventDefault();
 		$('#event, .pop_bg1, .pop_bg2').fadeOut(1000);
 
 		$(backdrop).fadeOut(1000).delay(1000)
-			.queue(function(next){
-				$(backdrop).remove();
-				$('#event, .pop_bg1, .pop_bg2').remove();
-				next();
+			.queue(function(){
+				$('#event, .pop_bg1, .pop_bg2, .drop').remove();
 			}).dequeue();
-	})
+		Mapset.reload();
+	});
 };
 Mapset.sharebox=function(b, url, title){
 	var document_title = title, location_url = url;
@@ -185,4 +223,10 @@ Mapset.hobear=function(p){
 		bear.appendTo('.map_grid:first');
 		bearp=0;
 	};
+};
+Mapset.reload=function(){
+	$.getJSON('#',function(data){
+		Mapset.hobear(data.site);
+		$('#bonusNO').text(data.bonus);
+	});
 };

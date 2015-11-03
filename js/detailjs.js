@@ -8,15 +8,35 @@ Mapset.prototype.eventbox=function(questions){
     popup.append(div.clone().addClass('pop_title2')).append(main).appendTo('body')
     popup.append('<div class="pop_close"><a href="#"><img src="images/close.png" alt="關閉" width="40" height="40" title="關閉" border="0"/></a></div>');
     var  boxtitle=$('.pop_title2');
-    var callback=function(){
-
+    var callback=function(action){
+        $.ajax({
+            url: '#',
+            method: 'post',
+            data: action
+        });
     };
     switch (questions){
         case 1:
             var question=function(){
                 for(var i=0; i<answers.length; i++){
-                    div.clone().addClass('td').text('A.'+answers[i]).appendTo('.table');
-                   $('<input>').attr('type', 'radio').prependTo('.td:eq('+i+')');
+                    div.clone().addClass('td').text(abc[i]+'.'+questions.option[i]).appendTo('.table');
+                    $('<input>').attr({
+                        'type': 'radio',
+                        'name': 'answer'
+                    }).prependTo('.td:eq('+i+')');
+                }
+            };
+            var checkans=function(e, answer){
+                $('.pop_but + .font01').remove();
+                if(e+1 == answer.questionEvent.answer) {
+                    var ans;
+                    ans={rewardId:answer.rewardId, rewardEvent:1};
+                    span.clone().addClass('font01').text('您答對！可獲得大富翁幸運抽獎(超商禮券)抽獎機會1次 ').appendTo(main).delay(1000).queue(function(){callback(ans)});
+                    $('.pop_but').off('click');
+                }
+                else  {
+                    span.clone().addClass('font01').text('您答錯了！').appendTo(main);
+                    $('.pop_but').off('click');
                 }
             };
             boxtitle.text('問答題目');
@@ -29,12 +49,14 @@ Mapset.prototype.eventbox=function(questions){
                 fontSize: "130%",
                 fontWeight: 900
             }).text('每年的什麼時候洄游性的黑鮪魚在臺灣南端的巴士海峽海域準備產卵？').appendTo(main);
-            span.clone().addClass('font01').text('Q.').prependTo($('p'));
-            div.clone().addClass('table').appendTo(main).queue(question()).dequeue();
-            $('<hr />').appendTo(main);
+            span.clone().addClass('pop_but').append($('<a />').text('確認'))
+                .appendTo(main);
+            $('.pop_but').on('click', function(){
+                checkans($(":radio[name='answer']").index($(":radio[name='answer']:checked")), questions);
+            });
             break;
         case 2:
-            var url=location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + questions.shareEvent.url;
+            // var url=location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + questions.shareEvent.url;
             boxtitle.text('新聞分享');
             p.clone().addClass('.sharetitle').text('台灣燈會 見證花燈技藝傳承與創新').appendTo(main);
             $('<hr />').appendTo(main);
@@ -42,11 +64,11 @@ Mapset.prototype.eventbox=function(questions){
             $('<hr />').appendTo(main);
             span.clone().addClass('pop_but').append($('<a />').text('分享至臉書')).insertAfter('hr:last-child');
             $('.pop_but').on('click', function(){
-                Mapset.sharebox('facebook', url, '繞著台灣跑  環島大富翁');
-                var ans;
-                ans={rewardId:questions.rewardId, rewardEvent:2};
-                callback('success', ans)
-            }).off('click');
+                Mapset.sharebox('facebook', '#', '繞著台灣跑  環島大富翁');
+                // var ans;
+                // ans={rewardId:questions.rewardId, rewardEvent:2};
+                // callback(ans)
+            });
             break;
         case 3:
             boxtitle.text('現玩現送');
@@ -76,9 +98,12 @@ Mapset.prototype.eventbox=function(questions){
             }).appendTo(main);
             div.clone().addClass('font01 sharetitle').appendTo(main);
             $('.sharetitle').text('恭喜您完成今日環島任務！獲得環島終點(LED液晶電視) 抽獎機會1次，也歡迎明天繼續來挑戰環島大富翁～');
+            span.clone().addClass('pop_but').append($('<a />').text('確認'))
+                .appendTo(main);
             break;
         case 5:
-            
+            $('.drop').remove();
+            $('#event, .pop_bg1, .pop_bg2').remove();
             break;
         default:
             var textselect=Math.floor(Math.random()*2+1);
@@ -91,14 +116,11 @@ Mapset.prototype.eventbox=function(questions){
             textselect == 1 ? $('.sharetitle').text('很殘念，遇到史上最強颱風將你吹回到起點！') : $('.sharetitle').text('哎呀 你不小心掉進了陷阱  回到了原點');
             break;
     }
-    span.clone().addClass('pop_but').append($('<a />').text('確認')).insertAfter('hr:last-child');
-    $('.pop_but:last-child').on('click', function(){
-        callback();
-    });
 };
 Mapset.prototype.dicerun=function(dice){
     var i=1, dicenum=0;
-    dice.attr("class", "dice");
+    dice.removeClass();
+    dice.addClass("dice");
     dice.css('cursor', 'default');
     dicenum = Math.floor(Math.random() * 6 + 1);
     dice.stop().animate({
@@ -124,12 +146,14 @@ Mapset.prototype.dicerun=function(dice){
             bearp=Mapset.walkStep(bearp, bear);
             if(i < dicenum){
                 walk();
-                i++
+                i++;
+            }else{
+                Mapset.lightbox(1, 2);
+                $('.rollarea').css('pointer-events', 'auto');
             }
         }, 500);
     }).delay(500*(dicenum+1)).queue(function(){
-        Mapset.lightbox(1, data);
-        $('.rollarea').css('pointer-events', 'auto');
+
     }).dequeue();
 };
 
@@ -145,6 +169,7 @@ $(function(){
 
     //擲骰子
     if(event==0){
+        Mapset.lightbox(2, '是否要使用30點紅利兌換擲骰機會一次？');
         $('.rollarea').css('pointer-events', 'none');
         dice.on('click', function(){
             var b=new Mapset();
@@ -153,45 +178,21 @@ $(function(){
 
         //location.reload();
     }else if(event == 2){
-        alert('點數不足，請明天在試一次。')
+        Mapset.lightbox(2, '哭哭了！紅利點數不足，明天再來玩吧！');
     }else if(event == 3){
-
-        $('.rollarea').css('pointer-events', 'none');
-        dice.attr("class", "dice");
-        dice.css('cursor', 'default');
-        dicenum = Math.floor(Math.random() * 6 + 1);
-        dice.stop().animate({
-           left : '+2px'
-        }, 85, function() {
-            dice.addClass('dice-t');
-        }).delay(170).animate({
-            top : '-5px'
-        }, 85, function(){
-            dice.removeClass('dice-t').addClass('dice-s');
-        }).delay(170).animate( {
-            opacity : 'show'
-        }, 510, function() {
-            dice.removeClass('dice-s').addClass('dice-e');
-        }).delay(85).animate({
-            left : '-2px',
-            top: '2px'
-        }, 85, function(){
-            dice.removeClass('dice-e').addClass('dice-' + dicenum);
-            dice.css('cursor', 'pointer');
-        });
-        alert('請登入之後再進行遊戲。');
+        Mapset.lightbox(2, '請先登入之後在跟熊熊一起玩遊戲喔！');
     }else{
         $('.rollarea').css('pointer-events', 'none');
         alert('是否花費紅利點數擲一次骰子?。');
     };
     $('#facebook').on('click', function(e){
         e.preventDefault();
-        Mapset.sharebox('facebook', window.location.href, '繞著台灣跑  環島大富翁');
+        Mapset.sharebox('facebook', '#', '繞著台灣跑  環島大富翁');
 
     });
     $('#google').on('click', function(e){
         e.preventDefault();
-        Mapset.sharebox('google', window.location.href);
+        Mapset.sharebox('google', '#');
     });
     $('li[class^=menu_]:not(".menu_but3")').on('click', function(e){
         e.preventDefault();
