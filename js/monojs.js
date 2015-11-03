@@ -157,8 +157,8 @@ Mapset.prototype.confirmbox=function(text){
 			});
 			break;
 		case '是否要使用30點紅利兌換擲骰機會一次？':
-			$('<span/>').addClass('pop_but').append($('<a/>').attr('href', '#').text('確定')).appendTo('.pop3_main');
 			$('<span/>').addClass('pop_but').append($('<a/>').attr('href', '#').text('取消')).appendTo('.pop3_main');
+			$('<span/>').addClass('pop_but').append($('<a/>').addClass('blue').attr('href', '#').text('確定')).appendTo('.pop3_main');
 			$('.pop_but > a:last').on('click', function(e){
 				e.preventDefault();
 				$('.drop, .pop3').remove();
@@ -166,9 +166,9 @@ Mapset.prototype.confirmbox=function(text){
 			});
 			break;
 		case '你可以免費擲一次骰子喔！':
-			$('<span/>').addClass('pop_but').append($('<a/>').attr('href', '#').text('確定')).appendTo('.pop3_main');
 			$('<span/>').addClass('pop_but').append($('<a/>').attr('href', '#').text('取消')).appendTo('.pop3_main');
-
+			$('<span/>').addClass('pop_but').append($('<a/>').addClass('blue').attr('href', '#').text('確定')).appendTo('.pop3_main');
+			
 			$('.pop_but > a:last').on('click', function(e){
 				e.preventDefault();
 				$('.drop, .pop3').remove();

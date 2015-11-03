@@ -183,7 +183,7 @@ $(function(){
         Mapset.lightbox(2, '請先登入之後在跟熊熊一起玩遊戲喔！');
     }else{
         $('.rollarea').css('pointer-events', 'none');
-        alert('是否花費紅利點數擲一次骰子?。');
+        Mapset.lightbox(2, '是否要使用30點紅利兌換擲骰機會一次？');
     };
     $('#facebook').on('click', function(e){
         e.preventDefault();

@@ -167,3 +167,10 @@
 	position: absolute;
 	z-index: 20;
 }
+.blue{
+	color: hsl(0, 0%, 100%)!important;
+	background: hsl(220, 50%, 50%);
+}
+.blue:hover{
+	color: hsl(220, 50%, 50%)!important;
+}
