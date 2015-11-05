@@ -1,7 +1,7 @@
 Mapset.prototype.eventbox=function(questions){
     var div=$('<div/>'), popup=$('<div id="event" class="pop center"/>'),
         main=div.clone().addClass('pop_main'), span=$('<span/>'), p=$('<p/>');
-    var answers=['1-3月', '4-6月', '10-12月'];
+    var answers=['1-3月', '4-6月', '10-12月'], abc=['A','B','C'];
     var h=$(window).outerHeight()/2-250;
 
     popup.css('top', h);
@@ -19,11 +19,11 @@ Mapset.prototype.eventbox=function(questions){
         case 1:
             var question=function(){
                 for(var i=0; i<answers.length; i++){
-                    div.clone().addClass('td').text(abc[i]+'.'+questions.option[i]).appendTo('.table');
+                    div.clone().addClass('td').text(abc[i]+'.'+answers[i]).appendTo('.pop_main .table');
                     $('<input>').attr({
                         'type': 'radio',
                         'name': 'answer'
-                    }).prependTo('.td:eq('+i+')');
+                    }).prependTo('.pop_main .td:eq('+i+')');
                 }
             };
             var checkans=function(e, answer){
@@ -49,6 +49,8 @@ Mapset.prototype.eventbox=function(questions){
                 fontSize: "130%",
                 fontWeight: 900
             }).text('每年的什麼時候洄游性的黑鮪魚在臺灣南端的巴士海峽海域準備產卵？').appendTo(main);
+            span.clone().addClass('font01').text('Q.').prependTo($('p'));
+            div.clone().addClass('table').appendTo(main).queue(question()).dequeue();
             span.clone().addClass('pop_but').append($('<a />').text('確認'))
                 .appendTo(main);
             $('.pop_but').on('click', function(){
@@ -148,7 +150,7 @@ Mapset.prototype.dicerun=function(dice){
                 walk();
                 i++;
             }else{
-                Mapset.lightbox(1, 2);
+                Mapset.lightbox(1, dicenum);
                 $('.rollarea').css('pointer-events', 'auto');
             }
         }, 500);

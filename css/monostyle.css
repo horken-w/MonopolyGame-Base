@@ -63,14 +63,13 @@
 }
 .table{
 	display: flex;
-	width: 100%;
+	flex-flow: row nowrap;
+	justify-content: space-around;
 }
 .td{
-	flex-flow: row wrap;
 	flex: 1;
 }
 .td8{
-	flex-flow: row wrap;
 	flex: 8;
 }
 #event > .pop_close{
