@@ -148,7 +148,7 @@ Mapset.prototype.confirmbox=function(text){
 	$('<p/>').addClass('font01').text(text).appendTo('.pop3_main');
 	div.clone().addClass('space').appendTo('.pop3_main');
 	switch(text){
-		case '請先登入之後在跟熊熊一起玩遊戲喔！':
+		case '請先登入之後在再熊熊一起玩遊戲喔！':
 		case '哭哭了！紅利點數不足，明天再來玩吧！':
 			$('<span/>').addClass('pop_but').append($('<a/>').attr('href', '#').text('確定')).appendTo('.pop3_main');
 			$('.pop_but > a').on('click', function(e){

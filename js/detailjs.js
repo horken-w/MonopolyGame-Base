@@ -182,7 +182,7 @@ $(function(){
     }else if(event == 2){
         Mapset.lightbox(2, '哭哭了！紅利點數不足，明天再來玩吧！');
     }else if(event == 3){
-        Mapset.lightbox(2, '請先登入之後在跟熊熊一起玩遊戲喔！');
+        Mapset.lightbox(2, '請先登入之後在再熊熊一起玩遊戲喔！');
     }else{
         $('.rollarea').css('pointer-events', 'none');
         Mapset.lightbox(2, '是否要使用30點紅利兌換擲骰機會一次？');
